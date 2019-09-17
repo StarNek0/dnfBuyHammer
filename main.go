@@ -31,12 +31,9 @@ func WriteMouseLeftClickList(q *bool, mousePointList *[]Point) {
 	}
 }
 func main() {
-	startMsg := robotgo.ShowAlert("提示", "点击确定开始录制3个按键", "确定", "取消")
-	if startMsg == 0 { //确定0，取消1
+	if startMsg := robotgo.ShowAlert("提示", "点击确定开始录制3个按键", "确定", "取消"); startMsg == 0 { //确定0，取消1
 		mousePointList := []Point{ReadMouseLeftClickPoint(), ReadMouseLeftClickPoint(), ReadMouseLeftClickPoint()}
-
-		endMsg := robotgo.ShowAlert("提示", "录制完毕, 点击确定开始播放，开始后单击右键退出", "确定", "取消")
-		if endMsg == 0 { //确定0，取消1
+		if endMsg := robotgo.ShowAlert("提示", "录制完毕, 点击确定开始播放，开始后单击右键退出", "确定", "取消"); endMsg == 0 { //确定0，取消1
 			quit := false
 			go WriteMouseLeftClickList(&quit, &mousePointList)
 			quit = robotgo.AddEvent("mright")
